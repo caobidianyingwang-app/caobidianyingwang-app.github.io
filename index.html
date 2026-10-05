@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>操逼电影网 - 高清影视在线观看</title>
+<meta name="description" content="操逼电影网(caobidianyingwang-app.github.io)提供最新电影、热播电视剧、综艺、动漫在线高清观看，免费无广告，每日更新。">
+<meta name="keywords" content="操逼电影网,caobien电影网,在线电影,高清影视,免费看片">
+<meta name="author" content="操逼电影网">
+<meta property="og:title" content="操逼电影网 - 高清影视在线观看">
+<meta property="og:description" content="操逼电影网提供最新电影、热播电视剧、综艺、动漫在线高清观看">
+<meta property="og:url" content="https://caobidianyingwang-app.github.io">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://caobidianyingwang-app.github.io">
+<style>
+/* ===== CSS 全部内联 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6c5ce7;
+    --secondary: #a29bfe;
+    --accent: #fd79a8;
+    --dark: #0a0a1a;
+    --darker: #050510;
+    --text: #e0e0e0;
+    --glass: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--darker);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* 背景动画 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(108, 92, 231, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(253, 121, 168, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(162, 155, 254, 0.1) 0%, transparent 50%);
+    z-index: -1;
+}
+
+/* 导航栏 - 毛玻璃 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-menu a:hover::after {
+    width: 80%;
+}
+
+.nav-menu a:hover {
+    color: #fff;
+}
+
+/* 移动端菜单按钮 */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--text);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* 全屏 Section */
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem 2rem;
+    position: relative;
+}
+
+.section-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #fff 0%, var(--secondary) 50%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    opacity: 0.85;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #fff;
+    box-shadow: 0 10px 40px rgba(108, 92, 231, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(108, 92, 231, 0.5);
+}
+
+.btn-secondary {
+    background: var(--glass);
+    color: var(--text);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+/* 栏目通用样式 */
+.section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    margin-bottom: 3rem;
+}
+
+/* 电影网格 - 横向滚动 */
+.movie-scroll-wrapper {
+    position: relative;
+    margin: 0 -2rem;
+    padding: 0 2rem;
+}
+
+.movie-scroll {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding: 1rem 0 2rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.movie-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.movie-scroll::-webkit-scrollbar-track {
+    background: var(--glass);
+    border-radius: 3px;
+}
+
+.movie-scroll::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+.movie-card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.movie-poster {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.movie-info {
+    padding: 1.5rem;
+}
+
+.movie-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.movie-info p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+}
+
+.movie-tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: rgba(108, 92, 231, 0.2);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: var(--secondary);
+}
+
+/* 分类 - 环形布局 */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.cat-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+}
+
+.cat-card:hover {
+    transform: scale(1.05);
+    border-color: var(--accent);
+    background: rgba(253, 121, 168, 0.05);
+}
+
+.cat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.cat-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.cat-card p {
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+/* 关于区域 */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.about-text h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.about-text p {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+.feature-list {
+    list-style: none;
+}
+
+.feature-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+}
+
+.feature-list li::before {
+    content: '✓';
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.stat-box {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+}
+
+/* 页脚 */
+.footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--glass-border);
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+}
+
+.footer p {
+    opacity: 0.6;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer a {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 26, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1rem;
+        transform: translateY(-150%);
+        transition: transform 0.3s ease;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .nav-menu.active {
+        transform: translateY(0);
+    }
+
+    .nav-menu a {
+        padding: 1rem;
+        text-align: center;
+        border-radius: 12px;
+        background: var(--glass);
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .movie-card {
+        flex: 0 0 240px;
+    }
+
+    .section {
+        padding: 5rem 1rem 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .categories-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .movie-card {
+        flex: 0 0 200px;
+    }
+}
+
+/* 动画 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-container > * {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* 隐藏无障碍 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<!-- 导航栏 -->
+<nav class="navbar" role="navigation" aria-label="主导航">
+    <div class="nav-container">
+        <a href="#" class="logo">操逼电影网</a>
+        <div class="menu-toggle" id="menuToggle" role="button" aria-label="切换菜单" tabindex="0">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#movies">电影推荐</a></li>
+            <li><a href="#categories">影片分类</a></li>
+            <li><a href="#about">关于我们</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- 首页 Hero -->
+<section class="section hero" id="home">
+    <div class="section-container">
+        <div class="hero-badge">🎬 操逼电影网 - 全新上线</div>
+        <h1>发现好电影<br>从这里开始</h1>
+        <p>操逼电影网(caobidianyingwang-app.github.io)为你精选全球高分影视，高清流畅播放，每日更新，免费观看。</p>
+        <div class="hero-buttons">
+            <a href="#movies" class="btn btn-primary">立即观看</a>
+            <a href="#categories" class="btn btn-secondary">浏览分类</a>
+        </div>
+    </div>
+</section>
+
+<!-- 电影推荐 -->
+<section class="section" id="movies">
+    <div class="section-container">
+        <h2 class="section-title">🔥 热门推荐</h2>
+        <p class="section-subtitle">操逼电影网为你精选近期最热影视作品</p>
+        <div class="movie-scroll-wrapper">
+            <div class="movie-scroll">
+                <div class="movie-card">
+                    <div class="movie-poster">🎬</div>
+                    <div class="movie-info">
+                        <h3>流浪地球 3</h3>
+                        <p>科幻 / 冒险 / 2026</p>
+                        <span class="movie-tag">正在热映</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">🎭</div>
+                    <div class="movie-info">
+                        <h3>封神第二部</h3>
+                        <p>奇幻 / 动作 / 2026</p>
+                        <span class="movie-tag">高分推荐</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">🚀</div>
+                    <div class="movie-info">
+                        <h3>星际穿越 2</h3>
+                        <p>科幻 / 剧情 / 2026</p>
+                        <span class="movie-tag">IMAX</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">🐉</div>
+                    <div class="movie-info">
+                        <h3>哪吒重生 2</h3>
+                        <p>动画 / 奇幻 / 2026</p>
+                        <span class="movie-tag">国漫之光</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">🕵️</div>
+                    <div class="movie-info">
+                        <h3>唐人街探案 5</h3>
+                        <p>喜剧 / 悬疑 / 2026</p>
+                        <span class="movie-tag">爆笑喜剧</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">⚔️</div>
+                    <div class="movie-info">
+                        <h3>刺客信条</h3>
+                        <p>动作 / 冒险 / 2026</p>
+                        <span class="movie-tag">游戏改编</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 影片分类 -->
+<section class="section" id="categories">
+    <div class="section-container">
+        <h2 class="section-title">📂 影片分类</h2>
+        <p class="section-subtitle">操逼电影网涵盖全品类影视资源，满足你的观影需求</p>
+        <div class="categories-grid">
+            <div class="cat-card">
+                <div class="cat-icon">🎬</div>
+                <h3>动作电影</h3>
+                <p>热血激战，视觉震撼</p>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">😂</div>
+                <h3>喜剧搞笑</h3>
+                <p>轻松解压，欢乐无限</p>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">🚀</div>
+                <h3>科幻未来</h3>
+                <p>脑洞大开，想象无限</p>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">💕</div>
+                <h3>爱情浪漫</h3>
+                <p>甜蜜虐心，感人至深</p>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">😱</div>
+                <h3>恐怖惊悚</h3>
+                <p>心跳加速，胆战心惊</p>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">📺</div>
+                <h3>热播剧集</h3>
+                <p>追剧不停，精彩不断</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 关于我们 -->
+<section class="section" id="about">
+    <div class="section-container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>关于操逼电影网</h2>
+                <p>操逼电影网(caobidianyingwang-app.github.io)是一个专注于高清影视在线观看的免费平台，致力于为用户提供最优质的观影体验。</p>
+                <ul class="feature-list">
+                    <li>每日更新最新电影、电视剧、综艺资源</li>
+                    <li>全站高清画质，支持多线路播放</li>
+                    <li>简洁无广告，纯净观影环境</li>
+                    <li>全平台自适应，手机电脑都能看</li>
+                    <li>智能推荐，精准匹配你的口味</li>
+                </ul>
+            </div>
+            <div class="about-stats">
+                <div class="stat-box">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">影视资源</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">每日更新</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">1,000,000+</div>
+                    <div class="stat-label">忠实用户</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">稳定在线</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer">
+    <p>© 2026 操逼电影网. 保留所有权利.</p>
+    <p>网站地址：<a href="https://caobidianyingwang-app.github.io">https://caobidianyingwang-app.github.io</a></p>
+    <p>关键词：操逼电影网 | caobien电影网 | 高清影视在线观看</p>
+</footer>
+
+<script>
+// 移动端菜单切换
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+
+menuToggle.addEventListener('click', function() {
+    navMenu.classList.toggle('active');
+});
+
+// 菜单项点击后关闭
+navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+    });
+});
+
+// 导航栏滚动效果
+let lastScroll = 0;
+const navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 100) {
+        navbar.style.background = 'rgba(5, 5, 16, 0.95)';
+    } else {
+        navbar.style.background = 'var(--glass)';
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// 平滑滚动
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
